@@ -2,6 +2,8 @@
 
 学习vue, 记录笔记
 
+代码放在：[vue-learn](https://github.com/solate/vue-learn)
+
 
 ## Hello World
 
@@ -16,3 +18,16 @@
 ### v-for
 
 循环遍历 data中 list 的数据
+
+### v-on
+
+绑定事件, 放在methods 内
+
+todoList 中在按钮中绑定提交事件
+
+
+
+
+
+
+## 参考
