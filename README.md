@@ -46,6 +46,12 @@ props 组件接受那些值
 简写: v-bind:index => :index
 ```
 
+### v-if
+
+条件判断语句
+
+
+
 ## MVVM 模式
 
 ### 传统MVP 设计模式
@@ -72,7 +78,7 @@ ViewModel : DOM Listeners , Data Bindings.  Vue 内置的, 我们并不需要关
 
 父组件使用v-bind 向子组件传值，子组件使用 this.$emit 向父组件触发事件，父组件监听这个时间, 并接受事件的参数
 
-
+全局变量： app.$data.xx
 
 
 
