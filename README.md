@@ -34,4 +34,14 @@ todoList 中在按钮中绑定提交事件
 
 
 
+
+
+## MVVM 模式
+
+### 传统MVP 设计模式
+
+View <=> Presenter <=> Model
+
+
+
 ## 参考
