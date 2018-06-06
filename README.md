@@ -32,15 +32,30 @@ todoList 中在按钮中绑定提交事件
 输入框数据发生变化, 则data中数据也发送变化. data 中定义变量发送变化则页面数据也跟着变
 
 
-
-
-
-
 ## MVVM 模式
 
 ### 传统MVP 设计模式
 
+主要面向DOM进行操作
+
 View <=> Presenter <=> Model
+
+View : 视图
+Presenter : 控制器, 大量的DOM操作
+
+### MVVM
+
+View <=> ViewModel <=> Model
+
+ViewModel : DOM Listeners , Data Bindings.  Vue 内置的, 我们并不需要关注
+
+主要面向数据进行操作
+
+
+## 前端组件化
+
+可以将页面进行切分, 组件就是界面中的一小块。
+
 
 
 
