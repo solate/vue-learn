@@ -25,6 +25,11 @@
 
 todoList 中在按钮中绑定提交事件
 
+```
+简写: v-on:click => @click
+```
+
+
 ### v-model
 
 数据的双向绑定
@@ -37,7 +42,9 @@ todoList 中在按钮中绑定提交事件
 
 props 组件接受那些值
 
-
+```
+简写: v-bind:index => :index
+```
 
 ## MVVM 模式
 
@@ -62,6 +69,9 @@ ViewModel : DOM Listeners , Data Bindings.  Vue 内置的, 我们并不需要关
 ## 前端组件化
 
 可以将页面进行切分, 组件就是界面中的一小块。
+
+父组件使用v-bind 向子组件传值，子组件使用 this.$emit 向父组件触发事件，父组件监听这个时间, 并接受事件的参数
+
 
 
 
