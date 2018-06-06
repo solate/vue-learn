@@ -21,10 +21,21 @@
 
 <script>
     //创建全局组件的方法
-    Vue.component("TodoItem", {
-        props: ['content'], //接收从外部传入的content
+    // Vue.component("TodoItem", {
+    //     props: ['content'], //接收从外部传入的content
+    //     template: "<li>{{content}}</li>",
+    // })
+
+
+
+    // 局部组件
+    var TodoItem = {
+        props: ['content'],
         template: "<li>{{content}}</li>",
-    })
+    }
+    
+
+
 
     var app = new Vue({
         el: "#app",
@@ -37,7 +48,10 @@
                 this.list.push(this.inputValue)
                 this.inputValue = ''
             }
-        }
+        },
+        components: {
+            TodoItem : TodoItem,
+        },
     })
 
 </script>
