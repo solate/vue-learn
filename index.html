@@ -11,13 +11,21 @@
 
 <div id="app">
 
-    <div v-if="show">{{message}}</div>
-    <div v-else> bye  </div>
-    <div v-show="show">{{message}}</div>
+    <div v-for="(item, index) of list"
+         :key="item.id">
+    {{item}} -- {{index}}
+    </div>
 
-    <div v-if="elem === 'a'">this is a </div>
-    <div v-else-if="elem === 'b'"> this is b  </div>
-    <div v-else> this is others  </div>
+
+    <template v-for="(item, index) of list">
+        <div>{{item}} -- {{index}}</div>
+        <span>{{item}}</span>
+    </template>
+
+
+    <div  v-for="(item, key, index) of userInfo">
+        <div>{{item}} -- {{key}} -- {{index}} </div>
+    </div>
 
 </div>
 
@@ -28,19 +36,26 @@
     var app = new Vue({
         el: "#app",
         data: {
-            // 控制页面元素是否显示
-            // v-show 会渲染到页面，只是display: none; ,不会移除dom, 经常控制界面元素显示和影藏
-            // v-if 会移除dom
-            show : false,
-            message : "hello world",
-            elem : "a" //app.elem = 'b'
-        },
-        methods: {
-            handleDivClick: function () {
-                //第三种方式 是, 绑定obj
-                this.styleObj.color = this.styleObj.color === "black" ? "red" : "black"
+            list: [
+                {
+                    id: "00001",
+                    text: "hello",
+                },
+                {
+                    id: "00002",
+                    text: "wir",
+                },
+                {
+                    id: "00003",
+                    text: "fxx",
+                },
+            ],
+            userInfo : {
+                name : "bobo",
+                age : 28,
+                gender : "male",
             }
-        }
+        },
 
 
     })
