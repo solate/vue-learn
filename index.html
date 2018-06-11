@@ -7,16 +7,16 @@
 
     <style>
         .activated {
-            color : red;
+            color: red;
         }
-     </style>
+    </style>
 </head>
 <body>
 
 <div id="app">
 
-    <div @click="handleDivClick"
-         :class="[activated， activatedOne]">hello world
+    <div :style="styleObj"
+         @click="handleDivClick">hello world
     </div>
 
 </div>
@@ -28,20 +28,14 @@
     var app = new Vue({
         el: "#app",
         data: {
-            activated: "",
-            activatedOne : "activated-one"
-        },
+            styleObj: {
+                color: "black",
+            },
+        }
         methods: {
             handleDivClick: function () {
-                //第二种方式，class 与 数组进行绑定
-
-                // if (this.activated === "activated"){
-                //     this.activated = "";
-                // }else {
-                //     this.activated =  "activated";
-                // }
-                this.activated = this.activated === "activated" ? "" : "activated";
-
+                //第三种方式 是, 绑定obj
+                this.styleObj.color = this.styleObj.color === "blakc" ? "red" : "blakc"
             }
         }
 
