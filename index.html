@@ -15,7 +15,7 @@
 
 <div id="app">
 
-    <div :style="styleObj"
+    <div :style="[styleObj, { fontSize : '20px'}]"
          @click="handleDivClick">hello world
     </div>
 
@@ -31,11 +31,11 @@
             styleObj: {
                 color: "black",
             },
-        }
+        },
         methods: {
             handleDivClick: function () {
                 //第三种方式 是, 绑定obj
-                this.styleObj.color = this.styleObj.color === "blakc" ? "red" : "blakc"
+                this.styleObj.color = this.styleObj.color === "black" ? "red" : "black"
             }
         }
 
