@@ -2,14 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>计算属性setter和getter</title>
+    <title>vue 样式绑定</title>
     <script src="./vue.js"></script>
+
+    <style>
+        .activated {
+            color : red;
+        }
+     </style>
 </head>
 <body>
 
 <div id="app">
 
-<p>{{fullName}}</p>
+    <div @click="handleDivClick"
+         :class="{activated : isActivated}">hello world
+    </div>
 
 </div>
 
@@ -20,26 +28,15 @@
     var app = new Vue({
         el: "#app",
         data: {
-            firstName: "Cell",
-            lastName: "Bob",
+            isActivated: false,
         },
-        computed : {
-          // fullName : function () {
-          //     return this.firstName + " " + this.lastName
-          // }
+        methods: {
+            handleDivClick: function () { 
+                //第一种样式绑定方式, 借助绑定的数据，进行数据值的替换 class的对象绑定
+                this.isActivated  = !this.isActivated
 
-          //可以写成对象的形势
-          fullName : {
-              get : function () {
-                  return this.firstName + " " + this.lastName
-              },
-              set : function (value) {
-                  var arr = value.split(" ");
-                  this.firstName = arr[0];
-                  this.lastName = arr[1];
-              }
-          }
-        },
+            }
+        }
 
 
     })
