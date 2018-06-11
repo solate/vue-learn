@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>vue 样式绑定</title>
+    <title>vue 条件渲染</title>
     <script src="./vue.js"></script>
 
-    <style>
-        .activated {
-            color: red;
-        }
-    </style>
+
 </head>
 <body>
 
 <div id="app">
 
-    <div :style="[styleObj, { fontSize : '20px'}]"
-         @click="handleDivClick">hello world
-    </div>
+    <div v-if="show">{{message}}</div>
+    <div v-else> bye  </div>
+    <div v-show="show">{{message}}</div>
+
+    <div v-if="elem === 'a'">this is a </div>
+    <div v-else-if="elem === 'b'"> this is b  </div>
+    <div v-else> this is others  </div>
 
 </div>
 
@@ -28,9 +28,12 @@
     var app = new Vue({
         el: "#app",
         data: {
-            styleObj: {
-                color: "black",
-            },
+            // 控制页面元素是否显示
+            // v-show 会渲染到页面，只是display: none; ,不会移除dom, 经常控制界面元素显示和影藏
+            // v-if 会移除dom
+            show : false,
+            message : "hello world",
+            elem : "a" //app.elem = 'b'
         },
         methods: {
             handleDivClick: function () {
