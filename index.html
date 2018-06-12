@@ -31,12 +31,12 @@
 
     var childOne = {
         //插槽
-        template: "<div>child one</div>",
+        template: "<div v-once>child one</div>", //v-once 放到内存中，不会销毁
     }
 
     var childTwo = {
         //插槽
-        template: "<div>child two</div>",
+        template: "<div v-once>child two</div>",
     }
 
 
