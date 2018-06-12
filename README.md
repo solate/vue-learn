@@ -349,8 +349,17 @@ var counter = {
 
 当子组件显示依赖父组件传递dom 进行展现的时候，使用插槽
 
+## CSS 动画效果
 
+### transition
 
+使用该标签实现动画效果, 过渡动画效果。
+
+原理：在一定时间在组件上加css
+
+![avatar](./css动画1.png)
+
+![avatar](./css动画2.png)
 
 
 

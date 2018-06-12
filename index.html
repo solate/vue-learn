@@ -2,26 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>动态组件和v-once指令</title>
+    <title>Vue 中CSS动画原理</title>
     <script src="./vue.js"></script>
 
+    <style>
+        .fade-enter {
+            opacity: 0;
+        }
+
+        .fade-enter-active {
+            transition: opacity 3s;
+        }
+
+        .fade-leave {
+
+        }
+
+        .fade-leave-to {
+            opacity: 0;
+        }
+
+        .fade-leave-active {
+            transition: opacity 3s;
+        }
+
+    </style>
 
 </head>
 <body>
 
 <div id="app">
-
-    <!-- 原来的写法
-    <child-one v-if="type === 'child-one'"></child-one>
-    <child-two v-if="type === 'child-two'"></child-two>
-    <button @click="handleBtnClick">change</button>
-    -->
-
-    <!--动态组件-->
-    <component :is="type">
-
-    </component>
-    <button @click="handleBtnClick">change</button>
+    <transition name="fade">
+        <div v-if="show">hello world</div>
+    </transition>
+    <button @click="handleBtnClick">切换</button>
 
 </div>
 
@@ -29,29 +43,14 @@
 <script>
 
 
-    var childOne = {
-        //插槽
-        template: "<div v-once>child one</div>", //v-once 放到内存中，不会销毁
-    }
-
-    var childTwo = {
-        //插槽
-        template: "<div v-once>child two</div>",
-    }
-
-
     var app = new Vue({
         el: "#app",
         data: {
-            type: "child-one"
-        },
-        components: {
-            childOne: childOne,
-            childTwo: childTwo,
+            show: true
         },
         methods: {
             handleBtnClick: function () {
-                this.type = this.type === 'child-one' ? 'child-two' : 'child-one';
+                this.show = !this.show
             }
         },
 
