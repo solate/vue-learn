@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>组件的参数校验与非Props特性</title>
     <script src="./vue.js"></script>
- 
+
 
 </head>
 <body>
@@ -16,18 +16,22 @@
 
 <script>
     var child = {
-        props : { //组件参数校验，将数组改为对象
-            // content : String,
-            // content : [String, Number], //参数校验，传递的参数必须是字符串或字符串
-            content : {
-                type : String,
-                required : false,
-                default : "default value",
-                validator : function (value) { //字符串必须大于5, 自定义校验器
-                    return value.length > 5
-                }
-            }
-        },
+        // //props 特性： 1. 父组件传递的值不会显示到页面上，2.子组件接受参数，可以直接显示
+        // props : { //组件参数校验，将数组改为对象
+        //     // content : String,
+        //     // content : [String, Number], //参数校验，传递的参数必须是字符串或字符串
+        //     content : {
+        //         type : String,
+        //         required : false,
+        //         default : "default value",
+        //         validator : function (value) { //字符串必须大于5, 自定义校验器
+        //             return value.length > 5
+        //         }
+        //     }
+        // },
+
+        // 非props 特性， 1. 子组件不能使用父组件传递的值， 2.属性会展现到子组件的dom 标签中
+
         template: '<div>{{content}}</div>',
     }
 
