@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>vue 条件渲染</title>
+    <title>组件中的细节点</title>
     <script src="./vue.js"></script>
 
 
@@ -11,26 +11,24 @@
 
 <div id="app">
 
-    <div v-for="(item, index) of list"
-         :key="item.id">
-    {{item}} -- {{index}}
-    </div>
-
-
-    <template v-for="(item, index) of list">
-        <div>{{item}} -- {{index}}</div>
-        <span>{{item}}</span>
-    </template>
-
-
-    <div  v-for="(item, key, index) of userInfo">
-        <div>{{item}} -- {{key}} -- {{index}} </div>
-    </div>
+<select>
+    <option is="row"></option>
+</select>
 
 </div>
 
 
 <script>
+
+
+    Vue.component("row", {
+        data : function () {
+          return {
+              content : "this is a row"
+          }
+        },
+        template : "<tr><td>{{content}}</td></tr>",
+    })
 
     //生命周期函数就是vue实例在某个时间点自动执行的函数
     var app = new Vue({

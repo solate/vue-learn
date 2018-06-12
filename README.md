@@ -254,10 +254,42 @@ Vue.set(app.userInfo, "address", "beijin")
 //实例方法
 app.$set(app.userInfo, "address", "beijin")
 
-``
+```
 
 
+### is
 
+使用is 解决h5中 标签规范 的bug, 包含后页面展现错误
+
+```
+
+
+<select>
+    <option is="row"></option>
+</select>
+
+
+Vue.component("row", {
+    template : "<tr><td>this is a row</td></tr>",
+})
+
+
+```
+
+### 注意点
+
+子组件定义data, 必须是一个函数，而不能是一个对象,
+
+```
+Vue.component("row", {
+    data : function () {
+      return {
+          content : "this is a row"
+      }
+    },
+    template : "<tr><td>{{content}}</td></tr>",
+})
+```
 
 
 
