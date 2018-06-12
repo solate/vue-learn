@@ -17,12 +17,25 @@
     <child>
         <p>Dell</p>
     </child>
+
+    <!--插槽 带名称-->
+    <body-content>
+        <div class="header" slot="header">header</div>
+        <div class="footer" slot="footer">footer</div>
+    </body-content>
 </div>
 
 
 <script>
-    //没个vue实例都挂载bus 属性
-    Vue.prototype.bus = new Vue()
+
+    Vue.component("body-content", {
+        template : `<div>
+                        <slot name="header">default header</slot>
+                        <div class="content">content</div>
+                        <slot name="footer">default footer</slot>
+                    </div>`,
+    })
+
 
     //两个child 之间传值
     var child = {
@@ -30,10 +43,6 @@
             content: String,
         },
 
-        // template: `<div>
-        //             <p>hello</p>
-        //             <div v-html="this.content"></div>
-        //         </div>`,
 
         //插槽
         template : `<div>
@@ -50,12 +59,6 @@
         components: {
             child: child,
         },
-        methods: {
-            handleClick: function () {
-                alert("click")
-            }
-        }
-
 
     })
 
