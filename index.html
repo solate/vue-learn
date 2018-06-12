@@ -11,9 +11,9 @@
 
 <div id="app">
 
-<select>
-    <option is="row"></option>
-</select>
+<div ref="hello" @click="handleClick"> hello world</div>
+
+
 
 </div>
 
@@ -21,41 +21,13 @@
 <script>
 
 
-    Vue.component("row", {
-        data : function () {
-          return {
-              content : "this is a row"
-          }
-        },
-        template : "<tr><td>{{content}}</td></tr>",
-    })
-
-    //生命周期函数就是vue实例在某个时间点自动执行的函数
     var app = new Vue({
         el: "#app",
-        data: {
-            list: [
-                {
-                    id: "00001",
-                    text: "hello",
-                },
-                {
-                    id: "00002",
-                    text: "wir",
-                },
-                {
-                    id: "00003",
-                    text: "fxx",
-                },
-            ],
-            userInfo : {
-                name : "bobo",
-                age : 28,
-                gender : "male",
+        methods : {
+            handleClick : function () {
+               console.log( this.$refs.hello.innerHTML  )
             }
         },
-
-
     })
 
 </script>

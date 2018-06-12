@@ -257,6 +257,8 @@ app.$set(app.userInfo, "address", "beijin")
 ```
 
 
+## 注意点
+
 ### is
 
 使用is 解决h5中 标签规范 的bug, 包含后页面展现错误
@@ -276,9 +278,7 @@ Vue.component("row", {
 
 ```
 
-### 注意点
-
-子组件定义data, 必须是一个函数，而不能是一个对象,
+### 子组件定义data, 必须是一个函数，而不能是一个对象,
 
 ```
 Vue.component("row", {
@@ -291,8 +291,24 @@ Vue.component("row", {
 })
 ```
 
+### 操作DOM
+
+使用 ref 定义引用名称
+
+```
+<div ref="hello" @click="handleClick"> hello world</div>
 
 
+var app = new Vue({
+    el: "#app",
+    methods : {
+        handleClick : function () {
+           console.log( this.$refs.hello.innerHTML  )
+        }
+    },
+})
+
+```
 
 
 
