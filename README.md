@@ -257,7 +257,7 @@ app.$set(app.userInfo, "address", "beijin")
 ```
 
 
-## 注意点
+## vue 组件间的关系
 
 ### is
 
@@ -339,6 +339,10 @@ var counter = {
 
 1. Vuex
 2. 总线机制 ： Bus/总线/发布订阅模式/观察者模式
+
+### Vue中的插槽(slot)
+
+当子组件显示依赖父组件传递dom 进行展现的时候，使用插槽
 
 
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>父子组件键传值(Bus/总线/发布订阅模式/观察者模式)</title>
+    <title>Vue中的插槽(slot)</title>
     <script src="./vue.js"></script>
 
 
@@ -10,9 +10,13 @@
 <body>
 
 <div id="app">
+    <!--当有很多时，不容易阅读-->
+    <child content="<p>Dell</p><p>Dell</p><p>Dell</p><p>Dell</p><p>Dell</p><p>Dell</p><p>Dell</p><p>Dell</p>"></child>
 
-    <child content="Dell"></child>
-    <child content="Bob"></child>
+    <!--插槽-->
+    <child>
+        <p>Dell</p>
+    </child>
 </div>
 
 
@@ -22,26 +26,22 @@
 
     //两个child 之间传值
     var child = {
-        data : function () {
-            return {
-                selfContent : this.content
-            }
-        },
         props: {
             content: String,
         },
-        template: '<div @click="handClick">{{selfContent}}</div>',
-        methods : {
-            handClick : function () {
-              this.bus.$emit('change', this.selfContent)
-            },
-        },
-        mounted : function () { //生命周期钩子，被挂载的时候触发
-            var this_ = this //作用域保存
-            this.bus.$on('change', function (msg) {
-                this_.selfContent = msg
-            })
-        },
+
+        // template: `<div>
+        //             <p>hello</p>
+        //             <div v-html="this.content"></div>
+        //         </div>`,
+
+        //插槽
+        template : `<div>
+                        <p>hello</p>
+                        <slot>默认内容</slot>
+                    </div>`,
+
+
 
     }
 
