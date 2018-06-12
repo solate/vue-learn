@@ -310,7 +310,23 @@ var app = new Vue({
 
 ```
 
+### 父组件通过属性的方式向子组件传值
 
+父组件
+```
+    <counter :count="0"></counter>
+```
+
+子组件 使用props 接受父组件传递的参数
+
+```
+var counter = {
+        template: '<div>{{count}}</div>',
+        props : ["count"],
+    }
+```
+
+单项数据流：子组件不能反过来修改父组件的值, 只能拷贝后修改自己的值
 
 
 

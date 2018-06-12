@@ -10,39 +10,43 @@
 <body>
 
 <div id="app">
-
-    <counter ref="one" @change="handleChange"></counter>
-    <counter ref="two" @change="handleChange"></counter>
+    <counter :count="3" @inc="handleIncrease"></counter>
+    <counter :count="2" @inc="handleIncrease"></counter>
     <div>{{total}}</div>
 </div>
 
 
 <script>
-    Vue.component("counter", {
+
+    var counter = {
         template: '<div @click="handleClick">{{number}}</div>',
+        props : ["count"],
         data: function () {
             return {
-                number: 0,
+                number: this.count, //子组件clone 父组件传来的值再修改
             }
         },
         methods: {
             handleClick: function () {
                 this.number++
-                this.$emit("change")
+                this.$emit("inc", 1) //子组件向父组件传递值，可以传递多个
             }
         }
-    })
+    }
 
     var app = new Vue({
         el: "#app",
         data : {
-          total : 0 ,
+          total : 5,
         },
         methods : {
-            handleChange : function () {
-                this.total = this.$refs.one.number + this.$refs.two.number
+            handleIncrease : function (value) {
+                this.total += value
             }
-        }
+        },
+        components : {
+            counter : counter,
+        },
 
     })
 
