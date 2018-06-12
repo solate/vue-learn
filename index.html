@@ -10,36 +10,34 @@
 <body>
 
 <div id="app">
-    <child :content="'hello world'"></child>
+    <!--<child @click="handleClick"></child>-->
+    <child @click.native="handleClick"></child>
 </div>
 
 
 <script>
     var child = {
-        // //props 特性： 1. 父组件传递的值不会显示到页面上，2.子组件接受参数，可以直接显示
-        // props : { //组件参数校验，将数组改为对象
-        //     // content : String,
-        //     // content : [String, Number], //参数校验，传递的参数必须是字符串或字符串
-        //     content : {
-        //         type : String,
-        //         required : false,
-        //         default : "default value",
-        //         validator : function (value) { //字符串必须大于5, 自定义校验器
-        //             return value.length > 5
-        //         }
+        template: '<div>child</div>',
+        // template: '<div @click=handleChildClick>child</div>',
+        // methods: {
+        //      //这样写太麻烦，所以使用   @click.native 标示监听原生事件
+        //     handleChildClick: function () { //原生事件
+        //         this.$emit("click") //触发父组件事件
         //     }
-        // },
-
-        // 非props 特性， 1. 子组件不能使用父组件传递的值， 2.属性会展现到子组件的dom 标签中
-
-        template: '<div>{{content}}</div>',
+        // }
     }
 
     var app = new Vue({
         el: "#app",
-        components : {
-            child : child,
+        components: {
+            child: child,
+        },
+        methods: {
+            handleClick: function () {
+                alert("click")
+            }
         }
+
 
     })
 
