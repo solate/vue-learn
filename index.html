@@ -2,37 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Vue 中CSS动画原理</title>
+    <title>Vue 中使用animate.css库</title>
     <script src="./vue.js"></script>
-
-    <style>
-        .fade-enter {
-            opacity: 0;
-        }
-
-        .fade-enter-active {
-            transition: opacity 3s;
-        }
-
-        .fade-leave {
-
-        }
-
-        .fade-leave-to {
-            opacity: 0;
-        }
-
-        .fade-leave-active {
-            transition: opacity 3s;
-        }
-
-    </style>
+    <link rel="stylesheet" type="text/css", href="./animate.css">
 
 </head>
 <body>
 
 <div id="app">
-    <transition name="fade">
+    <transition name="fade"
+                enter-active-class="animated swing"
+                leave-active-class="animated shake">
         <div v-if="show">hello world</div>
     </transition>
     <button @click="handleBtnClick">切换</button>
