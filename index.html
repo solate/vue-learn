@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>组件的参数校验与非Props特性</title>
+    <title>父子组件键传值(Bus/总线/发布订阅模式/观察者模式)</title>
     <script src="./vue.js"></script>
 
 
@@ -10,21 +10,39 @@
 <body>
 
 <div id="app">
-    <!--<child @click="handleClick"></child>-->
-    <child @click.native="handleClick"></child>
+
+    <child content="Dell"></child>
+    <child content="Bob"></child>
 </div>
 
 
 <script>
+    //没个vue实例都挂载bus 属性
+    Vue.prototype.bus = new Vue()
+
+    //两个child 之间传值
     var child = {
-        template: '<div>child</div>',
-        // template: '<div @click=handleChildClick>child</div>',
-        // methods: {
-        //      //这样写太麻烦，所以使用   @click.native 标示监听原生事件
-        //     handleChildClick: function () { //原生事件
-        //         this.$emit("click") //触发父组件事件
-        //     }
-        // }
+        data : function () {
+            return {
+                selfContent : this.content
+            }
+        },
+        props: {
+            content: String,
+        },
+        template: '<div @click="handClick">{{selfContent}}</div>',
+        methods : {
+            handClick : function () {
+              this.bus.$emit('change', this.selfContent)
+            },
+        },
+        mounted : function () { //生命周期钩子，被挂载的时候触发
+            var this_ = this //作用域保存
+            this.bus.$on('change', function (msg) {
+                this_.selfContent = msg
+            })
+        },
+
     }
 
     var app = new Vue({
