@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Vue 中使用animate.css库</title>
+    <title>Vue 中的Js动画与Velocity.js的结合</title>
     <script src="./vue.js"></script>
     <link rel="stylesheet" type="text/css" , href="./animate.css">
     <style>
@@ -22,20 +22,18 @@
 <body>
 
 <div id="app">
-    <!--自定义名称 enter-active-class
-    过渡和动画
-    1. appear appear-active-class 初次动画，解决第一次刷新没用动画的问题
-    2. type="transition" 动画时间标准。 animated动画1秒，自定义的3秒，使用该属性将以自定义动画时长为标准, 如果没有会不清楚到底用那个作为动画时长
-    3. :duration="10000" 自己可以定义动画时长，10秒才清除样式
-    4. :duration="{enter:5000, leave:1000}"  入场5秒，离场10 秒
+    <!--
+    js动画钩子
+    @before-enter
+    @enter
     -->
     <transition name="fade"
-                appear
-                type="transition"
-                :duration="{enter:5000, leave:10000}"
-                enter-active-class="animated swing fade-enter-active"
-                leave-active-class="animated shake fade-leave-active"
-                appear-active-class="animated swing"
+                @before-enter="handleBeforeEnter"
+                @enter="handleEnter"
+                @after-enter="handleAfterEnter"
+                @before-leave="handleBeforeLeave"
+                @leave="handleLeave"
+                @after-leave="handleAfterLeave"
     >
         <div v-if="show">hello world</div>
     </transition>
@@ -55,7 +53,41 @@
         methods: {
             handleBtnClick: function () {
                 this.show = !this.show
+            },
+            handleBeforeEnter: function (el) {
+                el.style.color = "red"
+            },
+            handleEnter: function (el, done) {
+                setTimeout( () => {
+                    el.style.color = "green"
+
+                },2000) //延时2秒 变成绿色
+
+                setTimeout( ()=> {
+                    done() //4秒的时候再结束
+                }, 4000)
+
+            },
+            handleAfterEnter : function (el) {
+                el.style.color = "black"
+            },
+            handleBeforeLeave : function (el) {
+                el.style.color = "red"
+            },
+            handleLeave : function (el, done) {
+                setTimeout( () => {
+                    el.style.color = "green"
+
+            },2000) //延时2秒 变成绿色
+
+                setTimeout( ()=> {
+                    done() //4秒的时候再结束
+                }, 4000)
+            },
+            handleAfterLeave : function (el) {
+                el.style.color = "black"
             }
+
         },
 
     })
