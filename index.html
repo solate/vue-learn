@@ -4,18 +4,38 @@
     <meta charset="UTF-8">
     <title>Vue 中使用animate.css库</title>
     <script src="./vue.js"></script>
-    <link rel="stylesheet" type="text/css", href="./animate.css">
+    <link rel="stylesheet" type="text/css" , href="./animate.css">
+    <style>
+        .fade-enter,
+        .fade-leave-to {
+            opacity: 0;
+        }
+
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity 3s;
+        }
+
+    </style>
 
 </head>
 <body>
 
 <div id="app">
-    <!--自定义名称 enter-active-class  过渡和动画  appear解决第一次刷新没用动画的问题-->
+    <!--自定义名称 enter-active-class
+    过渡和动画
+    1. appear appear-active-class 初次动画，解决第一次刷新没用动画的问题
+    2. type="transition" 动画时间标准。 animated动画1秒，自定义的3秒，使用该属性将以自定义动画时长为标准, 如果没有会不清楚到底用那个作为动画时长
+    3. :duration="10000" 自己可以定义动画时长，10秒才清除样式
+    4. :duration="{enter:5000, leave:1000}"  入场5秒，离场10 秒
+    -->
     <transition name="fade"
                 appear
-                enter-active-class="animated swing"
-                leave-active-class="animated shake"
-                appear-active -class="animated swing"
+                type="transition"
+                :duration="{enter:5000, leave:10000}"
+                enter-active-class="animated swing fade-enter-active"
+                leave-active-class="animated shake fade-leave-active"
+                appear-active-class="animated swing"
     >
         <div v-if="show">hello world</div>
     </transition>
