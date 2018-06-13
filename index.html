@@ -10,9 +10,13 @@
 <body>
 
 <div id="app">
+    <!--自定义名称 enter-active-class  过渡和动画  appear解决第一次刷新没用动画的问题-->
     <transition name="fade"
+                appear
                 enter-active-class="animated swing"
-                leave-active-class="animated shake">
+                leave-active-class="animated shake"
+                appear-active -class="animated swing"
+    >
         <div v-if="show">hello world</div>
     </transition>
     <button @click="handleBtnClick">切换</button>
