@@ -4,19 +4,8 @@
     <meta charset="UTF-8">
     <title>Vue 中的Js动画与Velocity.js的结合</title>
     <script src="./vue.js"></script>
-    <link rel="stylesheet" type="text/css" , href="./animate.css">
-    <style>
-        .fade-enter,
-        .fade-leave-to {
-            opacity: 0;
-        }
+    <script src="./velocity.min.js"></script>
 
-        .fade-enter-active,
-        .fade-leave-active {
-            transition: opacity 3s;
-        }
-
-    </style>
 
 </head>
 <body>
@@ -55,37 +44,22 @@
                 this.show = !this.show
             },
             handleBeforeEnter: function (el) {
-                el.style.color = "red"
+                el.style.opacity = 0;
             },
             handleEnter: function (el, done) {
-                setTimeout( () => {
-                    el.style.color = "green"
-
-                },2000) //延时2秒 变成绿色
-
-                setTimeout( ()=> {
-                    done() //4秒的时候再结束
-                }, 4000)
+                Velocity(el, {opacity: 1}, {duration: 3000, complete: done})
+            },
+            handleAfterEnter: function (el) {
+                 console.log("动画结束")
+            },
+            handleBeforeLeave: function (el) {
 
             },
-            handleAfterEnter : function (el) {
-                el.style.color = "black"
-            },
-            handleBeforeLeave : function (el) {
-                el.style.color = "red"
-            },
-            handleLeave : function (el, done) {
-                setTimeout( () => {
-                    el.style.color = "green"
+            handleLeave: function (el, done) {
 
-            },2000) //延时2秒 变成绿色
-
-                setTimeout( ()=> {
-                    done() //4秒的时候再结束
-                }, 4000)
             },
-            handleAfterLeave : function (el) {
-                el.style.color = "black"
+            handleAfterLeave: function (el) {
+
             }
 
         },

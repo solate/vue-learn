@@ -364,3 +364,6 @@ var counter = {
 
 
 ## 参考
+
+[animate.css](https://daneden.github.io/animate.css/)
+[Velocity.js](http://velocityjs.org/)
