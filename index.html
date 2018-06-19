@@ -2,9 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Vue 中的Js动画与Velocity.js的结合</title>
+    <title>Vue 中多个元素或组件的动画</title>
     <script src="./vue.js"></script>
-    <script src="./velocity.min.js"></script>
+    <style>
+        .v-enter, v-leave-to {
+            opacity: 0;
+        }
+        .v-enter-active, .v-leave-active {
+            transition: opacity 1s;
+        }
+    </style>
 
 
 </head>
@@ -12,19 +19,17 @@
 
 <div id="app">
     <!--
-    js动画钩子
-    @before-enter
-    @enter
+    不加 name="fade", css 默认使用 v- 开头， v-enter
+    1. 使用key 解决多个元素动画效果不执行的问题
+    2. mode="in-out" 动画效果，先进入后隐藏， out-in 先隐藏  后进行
     -->
-    <transition name="fade"
-                @before-enter="handleBeforeEnter"
-                @enter="handleEnter"
-                @after-enter="handleAfterEnter"
-                @before-leave="handleBeforeLeave"
-                @leave="handleLeave"
-                @after-leave="handleAfterLeave"
-    >
-        <div v-if="show">hello world</div>
+    <transition mode="out-in">
+        <!--动态组件， 多个组件动画-->
+        <component :is="type"></component>
+        <!--多个元素动画
+        <child v-if="show"></child>
+        <child-one v-else></child-one>
+         -->
     </transition>
     <button @click="handleBtnClick">切换</button>
 
@@ -33,34 +38,25 @@
 
 <script>
 
+    Vue.component('child', {
+        template : '<div>child</div>'
+    })
+
+    Vue.component('child-one', {
+        template : '<div>child-one</div>'
+    })
 
     var app = new Vue({
         el: "#app",
         data: {
-            show: true
+            // show: true,
+            type: 'child',
         },
         methods: {
             handleBtnClick: function () {
-                this.show = !this.show
+                // this.show = !this.show
+                this.type = this.type === 'child' ? "child-one" : "child"
             },
-            handleBeforeEnter: function (el) {
-                el.style.opacity = 0;
-            },
-            handleEnter: function (el, done) {
-                Velocity(el, {opacity: 1}, {duration: 3000, complete: done})
-            },
-            handleAfterEnter: function (el) {
-                 console.log("动画结束")
-            },
-            handleBeforeLeave: function (el) {
-
-            },
-            handleLeave: function (el, done) {
-
-            },
-            handleAfterLeave: function (el) {
-
-            }
 
         },
 
