@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Vue 中多个元素或组件的动画</title>
+    <title>Vue 中的列表过渡</title>
     <script src="./vue.js"></script>
     <style>
         .v-enter, v-leave-to {
             opacity: 0;
         }
+
         .v-enter-active, .v-leave-active {
             transition: opacity 1s;
         }
@@ -18,44 +19,32 @@
 <body>
 
 <div id="app">
-    <!--
-    不加 name="fade", css 默认使用 v- 开头， v-enter
-    1. 使用key 解决多个元素动画效果不执行的问题
-    2. mode="in-out" 动画效果，先进入后隐藏， out-in 先隐藏  后进行
-    -->
-    <transition mode="out-in">
-        <!--动态组件， 多个组件动画-->
-        <component :is="type"></component>
-        <!--多个元素动画
-        <child v-if="show"></child>
-        <child-one v-else></child-one>
-         -->
-    </transition>
-    <button @click="handleBtnClick">切换</button>
+    <!--transition-group 相当于在没个循环的 div 外包一层 transition-->
+    <transition-group>
+        <div v-for="(item, index) of list" :key="item.id">
+            {{item.title}}
+        </div>
+    </transition-group>
+    <button @click="handleBtnClick">Add</button>
 
 </div>
 
 
 <script>
 
-    Vue.component('child', {
-        template : '<div>child</div>'
-    })
-
-    Vue.component('child-one', {
-        template : '<div>child-one</div>'
-    })
+    var count = 0
 
     var app = new Vue({
         el: "#app",
         data: {
-            // show: true,
-            type: 'child',
+            list: []
         },
         methods: {
             handleBtnClick: function () {
-                // this.show = !this.show
-                this.type = this.type === 'child' ? "child-one" : "child"
+                this.list.push({
+                    id: count++,
+                    title: "hello world",
+                })
             },
 
         },
